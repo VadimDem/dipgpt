@@ -36,7 +36,7 @@ export const Login: React.FC<LoginProps> = ({
       } else {
         setError(result.message);
       }
-    } catch (err) {
+    } catch {
       setError('Произошла ошибка при входе');
     } finally {
       setIsLoading(false);
