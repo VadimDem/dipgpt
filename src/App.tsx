@@ -22,6 +22,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState('Все товары');
   const [orderData, setOrderData] = useState<OrderData | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [showCategoryMenu, setShowCategoryMenu] = useState(false);
 
   // Load user on app start
   useEffect(() => {
@@ -85,6 +86,10 @@ function App() {
   const handleBackToHome = () => {
     setCurrentView('home');
     setSelectedProduct(null);
+  };
+
+  const toggleCategoryMenu = () => {
+    setShowCategoryMenu(prev => !prev);
   };
 
   const handleCartClick = () => {
@@ -285,11 +290,29 @@ function App() {
         onSearchChange={setSearchTerm}
         onCartClick={handleCartClick}
         onLogoClick={handleBackToHome}
+        onMenuClick={toggleCategoryMenu}
         user={user}
         onUserClick={handleUserClick}
         onLogout={handleLogout}
       />
-      
+
+      {showCategoryMenu && (
+        <div className="fixed inset-0 z-40 flex">
+          <div className="bg-white w-64 p-4 shadow-lg overflow-y-auto">
+            <h2 className="text-lg font-semibold mb-4">Категории</h2>
+            <CategoryFilter
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategoryChange={(category) => {
+                setSelectedCategory(category);
+                setShowCategoryMenu(false);
+              }}
+            />
+          </div>
+          <div className="flex-1" onClick={() => setShowCategoryMenu(false)} />
+        </div>
+      )}
+
       <main>
         {renderCurrentView()}
       </main>
