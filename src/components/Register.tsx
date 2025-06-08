@@ -68,7 +68,7 @@ export const Register: React.FC<RegisterProps> = ({
       } else {
         setErrors({ general: result.message });
       }
-    } catch (err) {
+    } catch {
       setErrors({ general: 'Произошла ошибка при регистрации' });
     } finally {
       setIsLoading(false);

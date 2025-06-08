@@ -8,6 +8,7 @@ interface HeaderProps {
   onSearchChange: (term: string) => void;
   onCartClick: () => void;
   onLogoClick: () => void;
+  onMenuClick: () => void;
   user: UserType | null;
   onUserClick: () => void;
   onLogout: () => void;
@@ -19,6 +20,7 @@ export const Header: React.FC<HeaderProps> = ({
   onSearchChange,
   onCartClick,
   onLogoClick,
+  onMenuClick,
   user,
   onUserClick,
   onLogout
@@ -29,17 +31,25 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div 
-            className="flex items-center cursor-pointer group"
-            onClick={onLogoClick}
-          >
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-              <span className="text-white font-bold text-lg">БТ</span>
-            </div>
-            <div className="ml-3">
-              <h1 className="text-xl font-bold text-gray-900">БытТехника</h1>
-              <p className="text-xs text-gray-500">Магазин бытовых товаров</p>
+          {/* Left Menu and Logo */}
+          <div className="flex items-center">
+            <button
+              onClick={onMenuClick}
+              className="p-2 mr-2 text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+            <div
+              className="flex items-center cursor-pointer group"
+              onClick={onLogoClick}
+            >
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                <span className="text-white font-bold text-lg">БТ</span>
+              </div>
+              <div className="ml-3">
+                <h1 className="text-xl font-bold text-gray-900">БытТехника</h1>
+                <p className="text-xs text-gray-500">Магазин бытовых товаров</p>
+              </div>
             </div>
           </div>
 
@@ -112,9 +122,6 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </button>
 
-            <button className="lg:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors">
-              <Menu className="h-6 w-6" />
-            </button>
           </div>
         </div>
       </div>
